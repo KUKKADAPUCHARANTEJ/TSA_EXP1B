@@ -1,5 +1,5 @@
 # Ex.No: 1B                     CONVERSION OF NON STATIONARY TO STATIONARY DATA
-# Date: 
+# Date: 11/03/2025
 
 ### AIM:
 To perform regular differncing,seasonal adjustment and log transformatio on international airline passenger data
@@ -13,7 +13,7 @@ To perform regular differncing,seasonal adjustment and log transformatio on inte
 
 ```
 DEVELOPED  BY: KUKKADAPU CHARAN TEJ
-REGISTERED NUMBER:212224040167
+REGISTER NUMBER:212224040167
 ```
 ```py
 from matplotlib import pyplot as plt
@@ -38,19 +38,16 @@ plt.show()
 
 ```
 
+
 ### OUTPUT:
+![image](https://github.com/user-attachments/assets/43793485-6758-47bf-bc53-32ca05007e78)
 
 
-REGULAR DIFFERENCING:
-
-
-SEASONAL ADJUSTMENT:
-
-
-LOG TRANSFORMATION:
 
 
 
 ### RESULT:
 Thus we have created the python code for the conversion of non stationary to stationary data on international airline passenger
 data.
+### Interpretation:
+This is a Non stationary time series with Multiplicative Seasonality and Additive Trend
