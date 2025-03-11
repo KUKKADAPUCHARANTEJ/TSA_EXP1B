@@ -11,6 +11,32 @@ To perform regular differncing,seasonal adjustment and log transformatio on inte
 5. Display the overall results.
 ### PROGRAM:
 
+```
+DEVELOPED  BY: KUKKADAPU CHARAN TEJ
+REGISTERED NUMBER:212224040167
+```
+```py
+from matplotlib import pyplot as plt
+import pandas as pd
+
+df=pd.read_csv("/content/AirPassengers.csv")
+# df=pd.read_csv("/content/test.csv",parse_dates=["date"],index_col="date"
+
+df.head()
+df['Month']=pd.to_datetime(df['Month'])
+df.dtypes
+df.set_index('Month',inplace=True)
+
+df_resampled = df['#Passengers'].resample('D').interpolate()
+df_resampled.plot(kind='line',label='Total Sales', color='black')
+plt.title('Time Series Plot of Number of passengers ecah day')
+plt.xlabel('Day')
+plt.ylabel('Number of passengers')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```
 
 ### OUTPUT:
 
