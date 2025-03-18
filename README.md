@@ -16,34 +16,68 @@ DEVELOPED  BY: KUKKADAPU CHARAN TEJ
 REGISTER NUMBER:212224040167
 ```
 ```py
-from matplotlib import pyplot as plt
-import pandas as pd
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from statsmodels.tsa.seasonal import seasonal_decompose
 
-df=pd.read_csv("/content/AirPassengers.csv")
-# df=pd.read_csv("/content/test.csv",parse_dates=["date"],index_col="date"
+# Load the data
+data = pd.read_csv("AirPassengers.csv")
+# Create DataFrame
+df = pd.DataFrame(data)
 
-df.head()
-df['Month']=pd.to_datetime(df['Month'])
-df.dtypes
-df.set_index('Month',inplace=True)
+# Regular differencing
+df['Regular Difference'] = df['#Passengers'].diff()
 
-df_resampled = df['#Passengers'].resample('D').interpolate()
-df_resampled.plot(kind='line',label='Total Sales', color='black')
-plt.title('Time Series Plot of Number of passengers ecah day')
-plt.xlabel('Day')
-plt.ylabel('Number of passengers')
-plt.legend()
-plt.grid(True)
+# Seasonal adjustment
+result = seasonal_decompose(df['#Passengers'], model='additive', period=12)
+df['Seasonal Adjustment'] = result.resid
+
+# Log transformation
+df['Log Transformation'] = np.log(df['#Passengers'])
+
+# Plotting
+plt.figure(figsize=(14, 10))
+
+plt.subplot(4, 1, 1)
+plt.plot(df['#Passengers'], label='Original')
+plt.legend(loc='best')
+plt.title('Original Data')
+
+plt.subplot(4, 1, 2)
+plt.plot(df['Regular Difference'], label='Regular Difference')
+plt.legend(loc='best')
+plt.title('Regular Differencing')
+
+plt.subplot(4, 1, 3)
+plt.plot(df['Seasonal Adjustment'], label='Seasonal Adjustment')
+plt.legend(loc='best')
+plt.title('Seasonal Adjustment')
+
+plt.subplot(4, 1, 4)
+plt.plot(df['Log Transformation'], label='Log Transformation')
+plt.legend(loc='best')
+plt.title('Log Transformation')
+
+plt.tight_layout()
 plt.show()
-
 ```
 
 
 ### OUTPUT:
-![image](https://github.com/user-attachments/assets/43793485-6758-47bf-bc53-32ca05007e78)
+ORIGINAL DATA
+
+![S1](https://github.com/user-attachments/assets/6abda964-0533-4442-9cf0-86f8397df0cb)
 
 
+REGULAR DIFFERENCING
 
+![S2](https://github.com/user-attachments/assets/c5f1390a-0752-4b17-9cfe-72b41fb85806)
+
+
+SEASONAL ADJUSTMENT
+
+![S3](https://github.com/user-attachments/assets/2962df51-690d-408e-aaaf-db3867a8aa4c)
 
 
 ### RESULT:
